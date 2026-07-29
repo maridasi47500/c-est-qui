@@ -118,7 +118,7 @@ if filename == "user":
 """.format(filename=filename, mysession=mysession,columns=columns,values=values)
 addone+="""
         return render_template("{filename}form.html", {filename}s=user, one_user=one_user, the_title="add new {filename}"{references})
-"""
+""".format(filename=filename, mysession=mysession,columns=columns,values=values,references=references)
 addone+=sqltousles2
 addone+="""
     user = query_db('select * from {filename}')
