@@ -23,6 +23,7 @@ mysession="["
 myparam=","
 items=sys.argv
 referencesstr=""
+references=""
 requestfiles="""
 """
 while index < (len(items)):
@@ -30,12 +31,12 @@ while index < (len(items)):
     try:
       print(index, items[index])
       hasfile=""
-      references=""
+      referencesstr=""
       paramname=items[index]
       if ":file" in paramname: 
           hasfile="yes"
       if ":references" in paramname: 
-          references="yes"
+          referencesstr="yes"
       paramname=items[index].replace(":file","").replace(":references","")
       print(items[(index+1)])
     except:
