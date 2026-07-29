@@ -26,6 +26,10 @@ referencesstr=""
 references=""
 requestfiles="""
 """
+sqltousles="""
+"""
+sqltousles2="""
+"""
 while index < (len(items)):
 
     try:
@@ -56,8 +60,11 @@ while index < (len(items)):
 
     if referencesstr == "yes":
         references+=", tousles{paramname}=tousles{paramname}".format(paramname=paramname.replace("_id",""))
-        requestfiles+="""
+        sqltousles+="""
         tousles{paramname}= query_db("select * from {paramname}")
+""".format(paramname=paramname.replace("_id",""))
+        sqltousles2+="""
+    tousles{paramname}= query_db("select * from {paramname}")
 """.format(paramname=paramname.replace("_id",""))
         formhtml+="<div class=\"field\"><label for=\"somefield{paramname}\">{paramname}</label><select id=\"somefield{paramname}\" name=\"{paramname}\">".format(myparam=myparam,paramname=paramname,mytype=myfieldtype)
         formhtml+="{% "+"for some{paramname} in tousles{paramname}".format(myparam=myparam,paramname=paramname.replace("_id",""),mytype=myfieldtype)+" %}"
@@ -95,6 +102,7 @@ def add_one_{filename}():
         the_username = "anonyme"
         hey=request.form"""
 addone+=requestfiles
+addone+=sqltousles
 
 addone+="""
         one_user = query_db("insert into {filename} {columns} values {values}",hey)
@@ -109,12 +117,15 @@ if filename == "user":
 
 """.format(filename=filename, mysession=mysession,columns=columns,values=values)
 addone+="""
-        return render_template("{filename}form.html", {filename}s=user, one_user=one_user, the_title="add new {filename}")
+        return render_template("{filename}form.html", {filename}s=user, one_user=one_user, the_title="add new {filename}"{references})
+"""
+addone+=sqltousles2
+addone+="""
     user = query_db('select * from {filename}')
     one_user = query_db("select * from {filename} limit 1", one=True)
     return render_template("{filename}form.html", {filename}s=user, one_user=one_user, the_title="add new {filename}")
 
-""".format(filename=filename, mysession=mysession,columns=columns,values=values)
+""".format(filename=filename, mysession=mysession,columns=columns,values=values,references=references)
 if filename == "user":
     addone+="""
 @app.route("/{filename}_sign_out", methods=["GET","POST"])
