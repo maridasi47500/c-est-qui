@@ -71,6 +71,10 @@ def user_sign_out():
         return redirect("/")
 
 
+@app.route("/secrets/<myvariable>", methods=["GET","POST"])
+def secret_variable(myvariable):
+    last_user = query_db("select * from secrets where id = ?",[myvariable], one=True)
+    return render_template("secret.html", secret=last_user)
 @app.route("/user_log_in", methods=["GET","POST"])
 def user_login():
     if request.method == 'POST':
@@ -123,6 +127,7 @@ def add_one_personne():
 
 @app.route("/add_one_secrets", methods=["GET","POST"])
 def add_one_secrets():
+    x={}
 
     if request.method == 'POST':
 
@@ -137,20 +142,24 @@ def add_one_secrets():
 
 
         touslespersonne= query_db("select * from personne")
+        for y in touslespersonne:
+            x[y["id"]]=query_db("select * from secrets where personne_id = ?",[y["id"]])
 
         touslesuser= query_db("select * from user")
 
         one_user = query_db("insert into secrets (personne_id,user_id,pic,info_or_gossip) values (:personne_id,:user_id,:pic,:info_or_gossip)",hey)
         user = query_db('select * from secrets')
 
-        return render_template("secretsform.html", secretss=user, one_user=one_user, the_title="add new secrets", touslespersonne=touslespersonne, touslesuser=touslesuser)
+        return render_template("secretsform.html", secretss=user, one_user=one_user, the_title="add new secrets", touslespersonne=touslespersonne, touslesuser=touslesuser,touteslespersonnessecret=x)
 
 
     touslespersonne= query_db("select * from personne")
+    for y in touslespersonne:
+        x[y["id"]]=query_db("select * from secrets where personne_id = ?",[y["id"]])
 
     touslesuser= query_db("select * from user")
 
     user = query_db('select * from secrets')
     one_user = query_db("select * from secrets limit 1", one=True)
-    return render_template("secretsform.html", secretss=user, one_user=one_user, the_title="add new secrets", touslespersonne=touslespersonne, touslesuser=touslesuser)
+    return render_template("secretsform.html", secretss=user, one_user=one_user, the_title="add new secrets", touslespersonne=touslespersonne, touslesuser=touslesuser,touteslespersonnessecret=x)
 
