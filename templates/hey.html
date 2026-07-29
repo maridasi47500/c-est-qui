@@ -1,13 +1,16 @@
+{% extends 'base.html' %}
+
+{% block montitre %}
+debut de mes mots: bienvenue sur cest qui
+{% endblock %}
+{% block content %}
 <h1># c-est-qui</h1>
-<p>
-choisis une option
-<select>spam par email</select>
-<select>spam par photos en ligne</select>
-<select>spam photos sur des reseaux </select>
-</p>
-<p>entre le nom de quelqu'un
-<input name="myname" /></p>
-<p>ajouter des photos
-<input name="photos" multiple="true"/></p>
-<p>ajouter ce que dit ce spam?
-<textarea id="description"></textarea></p>
+{% for x in users | reverse %}
+ <li>{{ x["first_name"]  }}</li>
+
+{% endfor %} 
+fin de mes mots : repand des rumeurs sur quelquun en photos, qui souvre dans des popups
+{% endblock %}
+{% block liens %}
+<a href="/">welcome</a>
+{% endblock %}
