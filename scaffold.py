@@ -50,7 +50,7 @@ while index < (len(items)):
             uploaded_file.save(os.path.join('static/photos', uploaded_file.filename))
 
         hey["{paramname}"]=uploaded_file.filename
-"""
+""".format(paramname=paramname)
 
 
     if referencesstr == "yes":

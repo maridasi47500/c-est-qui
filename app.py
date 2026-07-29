@@ -58,3 +58,25 @@ def add_one_personne():
     one_user = query_db("select * from personne limit 1", one=True)
     return render_template("personneform.html", personnes=user, one_user=one_user, the_title="add new personne")
 
+@app.route("/add_one_secrets", methods=["GET","POST"])
+def add_one_secrets():
+
+    if request.method == 'POST':
+
+        the_username = "anonyme"
+        hey=request.form
+
+        uploaded_file = request.files['pic']
+        if uploaded_file.filename != '':
+            uploaded_file.save(os.path.join('static/photos', uploaded_file.filename))
+
+        hey["pic"]=uploaded_file.filename
+
+        one_user = query_db("insert into secrets (personne_id,user_id,pic,info_or_gossip) values (:personne_id,:user_id,:pic,:info_or_gossip)",hey)
+        user = query_db('select * from secrets')
+
+        return render_template("secretsform.html", secretss=user, one_user=one_user, the_title="add new secrets")
+    user = query_db('select * from secrets')
+    one_user = query_db("select * from secrets limit 1", one=True)
+    return render_template("secretsform.html", secretss=user, one_user=one_user, the_title="add new secrets")
+

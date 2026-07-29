@@ -35,3 +35,10 @@ create table if not exists personne(
         name text,
             fm text
                     );
+create table if not exists secrets(
+        id integer primary key autoincrement,
+        personne_id text,
+            user_id text,
+            pic text,
+            info_or_gossip text
+                    );
