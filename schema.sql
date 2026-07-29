@@ -26,6 +26,16 @@ INSERT OR IGNORE INTO contacts (contact_id, first_name, last_name, email, phone)
 VALUES( '1', 'anonyme', 'noname', 'anonymous@email.fr', '+2653546434');
 INSERT OR IGNORE INTO contacts (contact_id, first_name, last_name, email, phone)
 VALUES( '2', 'anne onim', 'onim', 'anne.onim@email.com', '+86877779898');
+create table if not exists user(
+        id integer primary key autoincrement,
+        username text,
+            pic text,
+            country_id text,
+            phone text,
+            email text,
+            password text,
+            fm text
+                    );
 create table if not exists country(
         id integer primary key autoincrement,
         name text

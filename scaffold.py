@@ -71,7 +71,7 @@ while index < (len(items)):
     """.format(myparam=myparam,paramname=paramname)
 columns+=")"
 values+=")"
-mysession+=")"
+mysession+="]"
 mystr="""create table if not exists {filename}(
         id integer primary key autoincrement,
 """
@@ -103,14 +103,14 @@ if filename == "user":
         for x in {mysession}:
             session[x]=hey[x]
 
-"""
+""".format(filename=filename, mysession=mysession,columns=columns,values=values)
 addone+="""
         return render_template("{filename}form.html", {filename}s=user, one_user=one_user, the_title="add new {filename}")
     user = query_db('select * from {filename}')
     one_user = query_db("select * from {filename} limit 1", one=True)
     return render_template("{filename}form.html", {filename}s=user, one_user=one_user, the_title="add new {filename}")
 
-"""
+""".format(filename=filename, mysession=mysession,columns=columns,values=values)
 if filename == "user":
     addone+="""
 @app.route("/{filename}_sign_out", methods=["GET","POST"])
@@ -134,7 +134,7 @@ def {filename}_login():
         except:
             return render_template("{filename}login.html")
     return render_template("{filename}login.html")
-""".format(filename=filename,mysession=mysession)
+""".format(filename=filename,mysession=mysession,columns=columns,values=values)
 
 
 with open("app.py", "a") as myfile:
