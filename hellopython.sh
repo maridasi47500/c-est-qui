@@ -2,6 +2,7 @@
 export GITHUBUSERNAME="maridasi47500"
 mkdir -p "/home/$USER/$1/templates" 
 mkdir -p "/home/$USER/$1/static/css"
+mkdir -p "/home/$USER/$1/static/photos"
 touch "/home/$USER/$1/templates/base.html" 
 touch "/home/$USER/$1/templates/hey.html" 
 echo "&1 $1 $2 $3 $4 $5"
@@ -12,6 +13,7 @@ echo "__pycache__/\ndatabase.db" > "/home/$USER/$1/.gitignore"
 echo "`cat <<EOF
 __pycache__/
 database.db
+static/photos/
 EOF`" > "/home/$USER/$1/.gitignore" 
 
 
