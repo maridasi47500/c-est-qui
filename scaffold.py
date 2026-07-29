@@ -134,7 +134,7 @@ def {filename}_login():
         except:
             return render_template("{filename}login.html")
     return render_template("{filename}login.html")
-"""
+""".format(filename=filename,mysession=mysession)
 
 
 with open("app.py", "a") as myfile:
