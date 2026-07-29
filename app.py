@@ -59,7 +59,7 @@ def add_one_user():
 
     user = query_db('select * from user')
     one_user = query_db("select * from user limit 1", one=True)
-    return render_template("userform.html", users=user, one_user=one_user, the_title="add new user")
+    return render_template("userform.html", users=user, one_user=one_user, the_title="add new user", touslescountry=touslescountry)
 
 
 @app.route("/user_sign_out", methods=["GET","POST"])
@@ -152,5 +152,5 @@ def add_one_secrets():
 
     user = query_db('select * from secrets')
     one_user = query_db("select * from secrets limit 1", one=True)
-    return render_template("secretsform.html", secretss=user, one_user=one_user, the_title="add new secrets")
+    return render_template("secretsform.html", secretss=user, one_user=one_user, the_title="add new secrets", touslespersonne=touslespersonne, touslesuser=touslesuser)
 

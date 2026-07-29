@@ -123,7 +123,7 @@ addone+=sqltousles2
 addone+="""
     user = query_db('select * from {filename}')
     one_user = query_db("select * from {filename} limit 1", one=True)
-    return render_template("{filename}form.html", {filename}s=user, one_user=one_user, the_title="add new {filename}")
+    return render_template("{filename}form.html", {filename}s=user, one_user=one_user, the_title="add new {filename}"{references})
 
 """.format(filename=filename, mysession=mysession,columns=columns,values=values,references=references)
 if filename == "user":
