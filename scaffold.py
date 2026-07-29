@@ -100,7 +100,7 @@ def add_one_{filename}():
     if request.method == 'POST':
 
         the_username = "anonyme"
-        hey=request.form"""
+        hey=dict(request.form)"""
 addone+=requestfiles
 addone+=sqltousles
 

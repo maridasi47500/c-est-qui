@@ -32,7 +32,7 @@ def add_one_user():
     if request.method == 'POST':
 
         the_username = "anonyme"
-        hey=request.form
+        hey=dict(request.form)
 
         uploaded_file = request.files['pic']
         if uploaded_file.filename != '':
@@ -89,7 +89,7 @@ def add_one_country():
     if request.method == 'POST':
 
         the_username = "anonyme"
-        hey=request.form
+        hey=dict(request.form)
 
 
         one_user = query_db("insert into country (name) values (:name)",hey)
@@ -108,7 +108,7 @@ def add_one_personne():
     if request.method == 'POST':
 
         the_username = "anonyme"
-        hey=request.form
+        hey=dict(request.form)
 
 
         one_user = query_db("insert into personne (name,fm) values (:name,:fm)",hey)
@@ -127,7 +127,7 @@ def add_one_secrets():
     if request.method == 'POST':
 
         the_username = "anonyme"
-        hey=request.form
+        hey=dict(request.form)
 
         uploaded_file = request.files['pic']
         if uploaded_file.filename != '':
