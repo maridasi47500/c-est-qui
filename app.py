@@ -26,3 +26,35 @@ def hello_world():
     one_user = query_db('select * from contacts where first_name = ?',
                 [the_username], one=True)
     return render_template("hey.html", users=user, one_user=one_user, the_title="my title")
+@app.route("/add_one_country", methods=["GET","POST"])
+def add_one_country():
+
+    if request.method == 'POST':
+
+        the_username = "anonyme"
+        hey=request.form
+
+        one_user = query_db("insert into country (name) values (:name)",hey)
+        user = query_db('select * from country')
+
+        return render_template("countryform.html", countrys=user, one_user=one_user, the_title="add new country")
+    user = query_db('select * from country')
+    one_user = query_db("select * from country limit 1", one=True)
+    return render_template("countryform.html", countrys=user, one_user=one_user, the_title="add new country")
+
+@app.route("/add_one_personne", methods=["GET","POST"])
+def add_one_personne():
+
+    if request.method == 'POST':
+
+        the_username = "anonyme"
+        hey=request.form
+
+        one_user = query_db("insert into personne (name,fm) values (:name,:fm)",hey)
+        user = query_db('select * from personne')
+
+        return render_template("personneform.html", personnes=user, one_user=one_user, the_title="add new personne")
+    user = query_db('select * from personne')
+    one_user = query_db("select * from personne limit 1", one=True)
+    return render_template("personneform.html", personnes=user, one_user=one_user, the_title="add new personne")
+

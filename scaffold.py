@@ -58,7 +58,7 @@ while index < (len(items)):
         formhtml+="<div class=\"field\"><label for=\"somefield{paramname}\">{paramname}</label><input type=\"{mytype}\" id=\"somefield{paramname}\" name=\"{paramname}\"/></div>".format(myparam=myparam,paramname=paramname,mytype=myfieldtype)
     else:
         formhtml+="<div class=\"field\"><label for=\"somefield{paramname}\">{paramname}</label><select id=\"somefield{paramname}\" name=\"{paramname}\">".format(myparam=myparam,paramname=paramname,mytype=myfieldtype)
-        formhtml+="{% for some{paramname} in tousles{paramname} %}".format(myparam=myparam,paramname=paramname,mytype=myfieldtype)
+        formhtml+="{% "+"for some{paramname} in tousles{paramname}".format(myparam=myparam,paramname=paramname,mytype=myfieldtype)+" %}"
         formhtml+="<option value=\"{{ some"+paramname+"['id'] }}\">{{ some"+paramname+"['name'] }}</option>{% endif %}"
         formhtml+="</select></div>"
     mysession+="'{paramname}'{myparam}".format(myparam=myparam,paramname=paramname)
