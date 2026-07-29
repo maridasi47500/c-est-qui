@@ -17,7 +17,7 @@ myfavdirectory=filename
 index = 2 
 createtable=""
 columns="("
-formhtml="<form  enctype=\"multipart\/form-data\" method=\"POST\">"
+formhtml="<form  enctype=\"multipart/form-data\" method=\"POST\">"
 values="("
 mysession="["
 myparam=","
